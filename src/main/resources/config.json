@@ -1,0 +1,7 @@
+{
+  "fileWithWords":"src/main/resources/words.json",
+  "userSettings": {
+    "from": "EN",
+    "to": "RU"
+  }
+}
