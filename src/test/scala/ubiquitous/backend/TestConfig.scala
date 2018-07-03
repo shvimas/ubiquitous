@@ -19,6 +19,12 @@ class TestConfig extends FunSuite {
     assert(cfg == shouldBe)
   }
 
+  test("load default") {
+    val cfg = Config.load(testConfigPath + "not a real file")
+    val shouldBe = Config("words.json", UserSettings(Lang.EN, Lang.RU))
+    assert(cfg == shouldBe)
+  }
+
   test("dump") {
     val shouldBe = Config.load(testConfigPath)
     val tempConfigPath = testResources + "temp_config.json"

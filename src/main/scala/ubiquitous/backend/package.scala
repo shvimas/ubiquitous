@@ -12,6 +12,10 @@ import scala.language.implicitConversions
 package object backend {
   val charset: Charset = UTF_8
 
+  private[this] val dumpDirSysEnvName = "UBIQUITOUS_DUMP_DIR"
+  val dumpDir: String = sys.env.getOrElse(dumpDirSysEnvName,
+    throw new IllegalArgumentException(s"$dumpDirSysEnvName is not set"))
+
   implicit val formats: Formats = DefaultFormats + Lang.serializer
 
   type Word = String

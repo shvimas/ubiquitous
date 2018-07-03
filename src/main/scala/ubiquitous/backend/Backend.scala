@@ -3,8 +3,12 @@ package ubiquitous.backend
 import ubiquitous.backend.translation.allTranslators
 
 class Backend {
-  private val cfg = Config.load("src/main/resources/config.json")
-  private val words = Words.load(cfg.fileWithWords)
+  private val cfgDumpFile = dumpDir + "config.json"
+  private val cfg = Config.load(cfgDumpFile)
+
+  private val wordsDumpFile = dumpDir + cfg.fileWithWords
+  private val words = Words.load(wordsDumpFile)
+
   private val translators = allTranslators
 
   def addWord(word: String, translation: Translation): Unit = {
@@ -30,5 +34,10 @@ class Backend {
       .filter(_._2.nonEmpty)
       .map(tuple => (tuple._1, tuple._2.get.get, tuple._3))
       .seq
+  }
+
+  def dump(): Unit = {
+    cfg.dumpTo(cfgDumpFile)
+    words.dumpTo(wordsDumpFile)
   }
 }
